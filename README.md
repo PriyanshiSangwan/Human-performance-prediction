@@ -27,8 +27,9 @@ To analyze employee productivity and build a machine learning model that can pre
 ## Machine Learning Model:
 Multiple models were trained:
 
-#### Model                          	R² Score   	RMSE	    MAE
-     Random Forest Regressor   	    0.9999	  Very Low	  Very Low
+#### Model                          	
+                                        R² Score   	RMSE	    MAE
+     Random Forest Regressor   	    0.9999	  Very Low   Very Low
     Gradient Boosting Regressor	    0.989	      Low	        Low
     Linear Regression              	0.977  	Moderate	   Moderate
 
