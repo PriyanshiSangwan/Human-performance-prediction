@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Performance Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 1.5em;
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Employee Performance Prediction</h2>
+        <form action="/predict" method="post">
+            <!-- Numeric / continuous features -->
+            <label for="Age">Age:</label>
+            <input type="number" name="Age" required>
+
+            <label for="Years_At_Company">Years at Company:</label>
+            <input type="number" name="Years_At_Company" min="0" required>
+
+            <label for="Monthly_Salary">Monthly Salary:</label>
+            <input type="number" name="Monthly_Salary" min="0" required>
+
+            <label for="Work_Hours_Per_Week">Work Hours Per Week:</label>
+            <input type="number" name="Work_Hours_Per_Week" min="0" required>
+
+            <label for="Projects_Handled">Projects Handled:</label>
+            <input type="number" name="Projects_Handled" min="0" required>
+
+            <label for="Overtime_Hours">Overtime Hours:</label>
+            <input type="number" name="Overtime_Hours" min="0" required>
+
+            <label for="Sick_Days">Sick Days:</label>
+            <input type="number" name="Sick_Days" min="0" required>
+
+            <label for="Remote_Work_Frequency">Remote Work Frequency (%):</label>
+            <input type="number" name="Remote_Work_Frequency" min="0" max="100" required>
+
+            <label for="Team_Size">Team Size:</label>
+            <input type="number" name="Team_Size" min="1" required>
+
+            <label for="Training_Hours">Training Hours:</label>
+            <input type="number" name="Training_Hours" min="0" required>
+
+            <label for="Promotions">Number of Promotions:</label>
+            <input type="number" name="Promotions" min="0" required>
+
+            <label for="Employee_Satisfaction_Score">Employee Satisfaction Score (1–5):</label>
+            <input type="number" name="Employee_Satisfaction_Score" min="1" max="5" step="0.01" required>
+
+            <!-- Categorical features -->
+            <label for="Education_Level">Education Level:</label>
+            <select name="Education_Level" required>
+                <option value="High School">High School</option>
+                <option value="Bachelor" selected>Bachelor</option>
+                <option value="Master">Master</option>
+                <option value="PhD">PhD</option>
+            </select>
+
+            <label for="Department">Department:</label>
+            <select name="Department" required>
+                <option value="Finance">Finance</option>
+                <option value="Customer Support">Customer Support</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Marketing">Marketing</option>
+                <option value="IT">IT</option>
+                <option value="HR">HR</option>
+                <option value="Sales">Sales</option>
+                <option value="Operations">Operations</option>
+                <option value="Legal">Legal</option>
+            </select>
+
+            <label for="Gender">Gender:</label>
+            <select name="Gender" required>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="Job_Title">Job Title:</label>
+            <select name="Job_Title" required>
+                <option value="Analyst">Analyst</option>
+                <option value="Manager">Manager</option>
+                <option value="Engineer">Engineer</option>
+                <option value="Developer">Developer</option>
+                <option value="Consultant">Consultant</option>
+                <option value="Technician">Technician</option>
+                <option value="Specialist">Specialist</option>
+            </select>
+
+            <!-- Extra fields used in the model -->
+            <label for="Resigned">Resigned:</label>
+            <select name="Resigned" required>
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <!-- <label for="Cluster">Cluster (0–2):</label>
+            <input type="number" name="Cluster" min="0" max="2" value="0" required> -->
+            
+            <label for="Employee_Segment">Employee Type (Segment):</label>
+            <select name="Cluster">
+                <option value="0">Cluster 0 – New / Early-career employees</option>
+                <option value="1">Cluster 1 – Stable mid-level employees</option>
+                <option value="2">Cluster 2 – High-responsibility / senior employees</option>
+            </select>
+
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
